@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
+import Sidebar from "./layouts/Sidebar.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/dashboard",
+    element: <Sidebar />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
