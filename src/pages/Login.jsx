@@ -8,7 +8,9 @@ function Login() {
       <div>
         <form action="" method="post">
           <input type="hidden" name="" />
+          <p>username</p>
           <input type="text" name="username" id="" />
+          <p>password</p>
           <input type="password" name="password" id="" />
           <input type="submit" value="login" />
         </form>
