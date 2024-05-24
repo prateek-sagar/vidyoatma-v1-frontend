@@ -1,23 +1,57 @@
-import { Link } from "react-router-dom";
+import React from "react";
 import "./App.css";
-import { createContext } from "react";
+import Home from "./pages/Home";
+import {
+  Route,
+  Router,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Dashboard from "./pages/Dashboard";
+import DashboardHome from "./layouts/DashboardHome";
 
-const UserContext = createContext();
+const routes = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "",
+        element: <DashboardHome />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+    ],
+  },
+]);
 
-function App() {
+export default function App() {
   return (
-    <UserContext.Provider value={"RaOne"}>
-      <div>
-        <h1 className="text-3xl font-bold underline">Home of Vidyoatma</h1>
-        <Link to={"/register"}>
-          <button>Try for free</button>
-        </Link>
-        <Link to={"/authenticate"}>
-          <button>Login</button>
-        </Link>
-      </div>
-    </UserContext.Provider>
+    <RouterProvider router={routes}></RouterProvider>
+    // <Router>
+    //   <Routes>
+    //     <Route element={<Home />} path="" exact />
+    //     <Route element={<Login />} path="/login" />
+    //     <Route element={<SignUp />} path="/signup" />
+    //     <Route element={<ProtectiveRoutes path="/dashboard" />} />
+    //   </Routes>
+    // </Router>
   );
 }
-
-export default App;

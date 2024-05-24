@@ -4,7 +4,6 @@ import UserAccount from "../components/UserAccount";
 import InstitutionDetails from "../components/InstitutionDetails";
 import useMultistepForm from "../customHooks/useMultistepForm";
 import ShowLogo from "../components/ShowLogo";
-import axios from "axios";
 
 const formData = {
   username: "",
@@ -135,18 +134,6 @@ export default function SignUp() {
     } catch (error) {
       console.error("Error:", error);
     }
-    // console.log(data);
-    // const response = await axios.post(
-    //   "http://localhost:8080/api/v1/auth/register/institution",
-    //   data,
-    //   {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }
-    // );
-    // console.log(response.headers);
-    // response.headers["set-cookie"];
   }
   return (
     <>
