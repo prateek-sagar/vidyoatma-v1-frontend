@@ -1,0 +1,62 @@
+@import './App.css';
+
+.flex-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-wrapper{
+    display:flex;
+    flex-direction: column;
+
+    max-width: 1024px;
+    margin-inline: auto;
+    padding: 0 var(--pd-horizontal);
+    
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-inline: auto;
+    align-items: center;
+    max-width: 1024px;
+}
+ header div:nth-child(1) {
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-900);
+
+}
+
+.footer {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+
+}
+.main-content{
+    flex-direction: column;
+    padding: 0 var(--pd-horizontal);
+}
+.main-header{
+    font-size: var(--fs-900);
+}
+
+.link{
+    border: 1px solid red;
+    border-radius: 7px;
+    background-color: darkorchid;
+}
+.links-btn{
+    flex-direction: row;
+    border: 1px solid red;
+    width: 100%;
+    gap: 10%;
+}
+
+.signup-btn{
+    width:100px;
+    font-size: var(--fs-700);
+}
