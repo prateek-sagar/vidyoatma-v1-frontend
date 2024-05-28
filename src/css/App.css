@@ -24,6 +24,12 @@ body {
   font-family: var(--ff-sans);
 }
 
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .address-container {
   display: grid;
   gap: 0 6px;
