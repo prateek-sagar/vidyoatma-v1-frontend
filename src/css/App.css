@@ -1,3 +1,35 @@
+:root{
+  /* --primary-color: blue;
+  color: var(--primary-color); */
+  --pd-horizontal:2rem; 
+  --ff-sans:"Outfit",sans-serif;
+  --fw-light:200;
+  --fw-normal:400;
+  --fw-bold:600;
+
+  --fs-400: 0.9375rem;
+  --fs-500: 1.25rem;
+  --fs-700: 1.625rem;
+  --fs-900: 2.5rem;
+
+}
+
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--ff-sans);
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .address-container {
   display: grid;
   gap: 0 6px;
