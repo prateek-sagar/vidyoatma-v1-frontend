@@ -4,6 +4,7 @@ import UserAccount from "../components/UserAccount";
 import InstitutionDetails from "../components/InstitutionDetails";
 import useMultistepForm from "../customHooks/useMultistepForm";
 import ShowLogo from "../components/ShowLogo";
+import { Link } from "react-router-dom";
 
 const formData = {
   username: "",
@@ -164,6 +165,12 @@ export default function SignUp() {
                   {isLastStep ? "Register" : "Next"}
                 </button>
               </div>
+              <p>
+                Already an existing user?{" "}
+                <Link to={"/login"} className="underline">
+                  login
+                </Link>
+              </p>
             </form>
           </div>
         </div>
