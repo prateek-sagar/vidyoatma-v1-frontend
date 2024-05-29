@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const UserContext = createContext("Raone");
 
 const currentUser = {
-  name: "G-One",
+  name: "",
   islogIn: false,
   id: "",
   email: "",
