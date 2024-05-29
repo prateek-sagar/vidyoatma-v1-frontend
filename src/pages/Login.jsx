@@ -9,6 +9,7 @@ function Login() {
         <input type="hidden" name="" />
         {/* <label>USERNAME</label> */}
         <input
+          className="input-text"
           type="text"
           name="username"
           placeholder=" Enter username"
@@ -16,12 +17,13 @@ function Login() {
         />
         {/* <label>PASSWORD</label> */}
         <input
+          className="input-text"
           type="password"
           name="password"
           placeholder="Enter password"
           id=""
         />
-        <input type="submit" value="login" />
+        <input type="submit" className="login-btn" value="login" />
       </form>
     </div>
   );
