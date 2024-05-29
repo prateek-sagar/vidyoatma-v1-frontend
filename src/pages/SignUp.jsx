@@ -3,7 +3,6 @@ import { useImmer } from "use-immer";
 import UserAccount from "../components/UserAccount";
 import InstitutionDetails from "../components/InstitutionDetails";
 import useMultistepForm from "../customHooks/useMultistepForm";
-import ShowLogo from "../components/ShowLogo";
 import { Link } from "react-router-dom";
 
 const formData = {
@@ -130,7 +129,7 @@ export default function SignUp() {
           credentials: "include",
         }
       );
-      console.log(response.headers);
+      console.log(response.status);
       const result = await response.json();
       console.log("Success:", result);
     } catch (error) {
