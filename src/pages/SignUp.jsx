@@ -126,6 +126,7 @@ export default function SignUp() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
+          credentials: "include",
         }
       );
       console.log(response.headers);
@@ -137,13 +138,13 @@ export default function SignUp() {
   }
   return (
     <>
-      <div className="w-full h-auto min-h-screen bg-black flex">
-        <div className="h-auto bg-white flex flex-col w-full md:w-2/3 p-2">
-          {/* main content  */}
-          <div className="px-3 mt-2 flex justify-center items-center md:ml-2 md:justify-start">
-            <ShowLogo />
+      <div className="w-full my-auto h-auto flex">
+        <div className="flex flex-col w-full p-2  md:flex-row-reverse">
+          <div className="w-full flex  justify-center items-center text-[4rem] md:text-[6rem] md:font-bold text-teal-300">
+            Sign Up
           </div>
-          <div className="  flex justify-center items-center h-full">
+          {/* main content  */}
+          <div className=" mx-auto  my-auto min-w-[35rem] min-h-[25rem] flex justify-center items-center">
             <form
               onSubmit={onSubmit}
               className="w-3/5 flex flex-col justify-center items-center h-full"
@@ -165,11 +166,6 @@ export default function SignUp() {
               </div>
             </form>
           </div>
-        </div>
-        <div className="h-screen fixed right-0 bg-gradient-to-r from-cyan-100 to-sky-200 hidden md:flex md:justify-center md:items-center md:w-1/3 md:min-w-[400px]">
-          {/* side content */}
-          {data.address.building_no}
-          {data.address.city}
         </div>
       </div>
     </>
