@@ -12,7 +12,9 @@ export default function UserAccount(props) {
         className="h-10 border-none bg-gray-300 font-outfit text-gray-600  text-xl rounded-full focus:ring-blue-500 w-full focus:border-blue-500 block py-1 px-4"
         onChange={(e) => props.updateUsername(e)}
       />
-      <label className="font-outfit text-3xl font-semibold">Password</label>
+      <label className="font-outfit text-3xl font-semibold">
+        Enter Password
+      </label>
       <input
         required
         type="password"

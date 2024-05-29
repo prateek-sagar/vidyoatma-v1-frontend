@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/LoginPage.css";
+import { Link } from "react-router-dom";
 const LOGIN_DATA = {
   username: "",
   password: "",
@@ -39,36 +40,50 @@ function Login() {
 
   // Login page accessible to all
   return (
-    <div className="flex-center login-card">
-      <h1 className="text-4xl w-full px-8">Login</h1>
-      <form className="login-form" action="" method="post">
-        <input type="hidden" name="" />
-        {/* <label>USERNAME</label> */}
-        <input
-          required
-          className="input-text"
-          type="text"
-          name="username"
-          onChange={(e) => handleUsername(e)}
-          placeholder=" Enter username"
-        />
-        {/* <label>PASSWORD</label> */}
-        <input
-          onChange={(e) => {
-            handlePassword(e);
-          }}
-          className="input-text"
-          type="password"
-          name="password"
-          placeholder="Enter password"
-        />
-        <input
-          type="button"
-          onClick={authenticate}
-          className="login-btn"
-          value="login"
-        />
-      </form>
+    <div className="login-page">
+      <h1 className="flex-center text-[4rem] md:text-[6rem] md:font-bold text-teal-300 w-full">
+        Login
+      </h1>
+      <div className="flex-center login-card">
+        <form className="login-form" action="" method="post">
+          <input type="hidden" name="" />
+          <label className="font-outfit text-2xl md:text-3xl font-semibold">
+            Enter Username
+          </label>
+          <input
+            required
+            className="input-text"
+            type="text"
+            name="username"
+            onChange={(e) => handleUsername(e)}
+            placeholder=" Enter username"
+          />
+          <label className="font-outfit text-2xl md:text-3xl font-semibold">
+            Enter Password
+          </label>
+          <input
+            onChange={(e) => {
+              handlePassword(e);
+            }}
+            className="input-text"
+            type="password"
+            name="password"
+            placeholder="Enter password"
+          />
+          <input
+            type="button"
+            onClick={authenticate}
+            className="login-btn"
+            value="login"
+          />
+          <p className="w-full flex-center">
+            Not an existing user?{" "}
+            <Link to={"/signup"} className="underline">
+              signup
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

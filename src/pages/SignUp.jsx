@@ -144,10 +144,10 @@ export default function SignUp() {
             Sign Up
           </div>
           {/* main content  */}
-          <div className=" mx-auto  my-auto min-w-[35rem] min-h-[25rem] flex justify-center items-center">
+          <div className=" mx-auto my-auto md:min-w-[35rem] md:min-h-[25rem] flex justify-center items-center">
             <form
               onSubmit={onSubmit}
-              className="w-3/5 flex flex-col justify-center items-center h-full"
+              className="w-4/5 md:w-3/5 flex flex-col justify-center items-center h-full"
             >
               {step}
               <div className="max-w-sm mx-auto grid gap-y-4 w-full my-8 font-outfit font-medium text-[22px]  text-white ">
@@ -164,7 +164,7 @@ export default function SignUp() {
                   {isLastStep ? "Register" : "Next"}
                 </button>
               </div>
-              <p>
+              <p className="w-full flex-center">
                 Already an existing user?{" "}
                 <Link to={"/login"} className="underline">
                   login
