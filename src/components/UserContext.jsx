@@ -1,22 +1,31 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
+import { useImmer } from "use-immer";
 
 const UserContext = createContext();
 
 const currentUser = {
-  name: "",
-  islogIn: false,
+  islogIn: true,
   id: "",
-  email: "",
   role: "",
 };
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(currentUser);
+  const [user, updateUser] = useImmer(currentUser);
   const login = (response) => {
-    console.log(response);
+    console.log(response.id);
+    updateUser((draft) => {
+      draft.id = response.id;
+      draft.role = response.role;
+      draft.islogIn = true;
+    });
+    console.log(user.id);
   };
   const logout = () => {
-    setUser(currentUser);
+    updateUser((draft) => {
+      draft.id = currentUser.id;
+      draft.islogIn = currentUser.islogIn;
+      draft.role = currentUser.role;
+    });
   };
   return (
     <UserContext.Provider value={{ user, login, logout }}>
