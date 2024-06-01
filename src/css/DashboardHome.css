@@ -1,0 +1,67 @@
+.home-container {
+  --gaps: 2rem;
+  height: max-content;
+  display: grid;
+  gap: var(--gaps);
+  margin-block: var(--gaps);
+  padding: var(--gaps);
+}
+.institution-details {
+  height: max-content;
+  display: grid;
+}
+
+.institution-details p:nth-child(1) {
+  font-size: var(--fs-900);
+  font-weight: var(--fw-bold);
+}
+.btn-section {
+  height: 2.25rem;
+  display: grid;
+  grid-template-columns: 10rem 10rem;
+}
+.btn-section button {
+  background: #234;
+  border-radius: 10px;
+  box-shadow: 0 6px 5px -5px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6.7px);
+  -webkit-backdrop-filter: blur(6.7px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  margin-inline-end: 2rem;
+}
+.standard-list {
+  max-width: 50rem;
+  display: grid;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+
+.standard-list li {
+  /* border: 1px solid green; */
+  background-color: #234;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  border-left: 5px solid #ffffff;
+}
+
+@media screen and (max-width: 480px) {
+  .standard-list {
+    width: 100%;
+  }
+  .institution-details p:nth-child(1) {
+    font-size: var(--fs-700);
+    font-weight: var(--fw-bold);
+  }
+  .btn-section {
+    height: 2.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .btn-section button {
+    margin-inline-end: 0;
+  }
+}

@@ -1,0 +1,23 @@
+@import "./App.css";
+
+.private-wrapper {
+  background-color: #123;
+  min-height: 100vh;
+  color: white;
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  gap: 2rem;
+}
+.sidebar-container {
+  display: block;
+  background-color: pink;
+}
+
+@media screen and (max-width: 760px) {
+  .private-wrapper {
+    grid-template-columns: auto;
+  }
+  .sidebar-container {
+    display: none;
+  }
+}
