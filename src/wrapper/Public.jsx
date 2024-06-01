@@ -4,7 +4,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function Public() {
-  console.log(window.location.pathname);
   return (
     <div className="public-wrapper">
       <Header />
