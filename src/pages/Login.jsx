@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../css/LoginPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserContext } from "../components/UserContext";
+import { useFeatureContext } from "../components/FeaturesContext";
 const LOGIN_DATA = {
   username: "",
   password: "",
@@ -8,6 +10,9 @@ const LOGIN_DATA = {
 
 function Login() {
   const [data, setData] = useState(LOGIN_DATA);
+  const { login } = useUserContext();
+  const { addFeature } = useFeatureContext();
+  const navigate = useNavigate();
 
   function handleUsername(e) {
     setData({ ...data, username: e.target.value });
@@ -29,6 +34,12 @@ function Login() {
           credentials: "include",
         }
       );
+      if (response.ok) {
+        const result = await response.json();
+        login(result);
+        addFeature(result.features);
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -68,10 +79,11 @@ function Login() {
             className="input-text"
             type="password"
             name="password"
+            required
             placeholder="Enter password"
           />
           <input
-            type="button"
+            type="submit"
             onClick={authenticate}
             className="login-btn"
             value="login"
