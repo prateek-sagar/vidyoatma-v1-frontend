@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useImmer } from "use-immer";
 import UserAccount from "../components/UserAccount";
 import InstitutionDetails from "../components/InstitutionDetails";
 import useMultistepForm from "../customHooks/useMultistepForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useFeatureContext } from "../components/FeaturesContext";
+import { useUserContext } from "../components/UserContext";
 
 const formData = {
   username: "",
@@ -26,6 +28,11 @@ const formData = {
 
 export default function SignUp() {
   const [data, updateData] = useImmer(formData);
+  const [error, setError] = useState(null);
+  const { feature, addFeature } = useFeatureContext();
+  const { login } = useUserContext();
+
+  const navigate = useNavigate();
   function handleUsernameChange(e) {
     updateData((draft) => {
       draft.username = e.target.value;
@@ -129,11 +136,19 @@ export default function SignUp() {
           credentials: "include",
         }
       );
-      console.log(response.status);
-      const result = await response.json();
+      if (response.status === 200) {
+        const result = await response.json();
+        login(result);
+        addFeature(result.features);
+        navigate("/dashboard");
+      } else {
+        setError("User Exists");
+        alert(error);
+      }
       console.log("Success:", result);
     } catch (error) {
       console.error("Error:", error);
+      alert("Server Error not connected! try again after some time");
     }
   }
   return (
