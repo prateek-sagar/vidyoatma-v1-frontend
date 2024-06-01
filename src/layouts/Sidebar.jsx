@@ -1,63 +1,50 @@
-import React from "react";
-import { GoGear } from "react-icons/go";
-
+import React, { useState } from "react";
+import "../css/Navigation.css";
+import { useFeatureContext } from "../components/FeaturesContext";
+import { useUserContext } from "../components/UserContext";
+import { useNavigate } from "react-router-dom";
 function Sidebar() {
-  // const user = useContext(UserContext);
-  const institution_features = [
-    {
-      id: 1,
-      name: "TSUNAMI",
-    },
-    {
-      id: 2,
-      name: "Student Portfolio",
-    },
-    {
-      id: 3,
-      name: "Track Course",
-    },
-    {
-      id: 4,
-      name: "Notification",
-    },
-    {
-      id: 5,
-      name: "Attendance",
-    },
-    {
-      id: 6,
-      name: "Finance",
-    },
-    {
-      id: 7,
-      name: "Allocation",
-    },
-  ];
+  const [active, setActive] = useState(1);
+  const { feature } = useFeatureContext();
+  const { logout } = useUserContext();
+  const navigate = useNavigate();
+  const handlelogout = () => {
+    logout();
+    console.log("logging out");
+    navigate("/login");
+  };
+  const handleActiveId = (id) => {
+    setActive(id);
+  };
+  const _features = [{ id: 1, name: "Home" }];
+  for (let index = 0; index < feature.length; index++) {
+    const element = feature[index];
+    _features.push({ id: index + 2, name: element });
+  }
   // it is protected and seen after login
   return (
-    <div className="h-screen md:max-w-[250px] bg-gray-400 sidebar font-outfit">
-      <div className="user-info flex flex-col justify-center items-start p-2">
-        <p className="ml-2 text-2xl">G-One Test School</p>
-        <p className="ml-2 text-sm">test@school.com</p>
+    <div className="sidebar">
+      <div className="sidebar-header">
+        <p className="">G-One Test School</p>
+        <p className="">test@school.com</p>
       </div>
-      <div className="features p-2">
-        <ul className=" h-full flex flex-col justify-evenly px-2">
-          {institution_features.map((feature) => (
+      <nav>
+        <ul className="nav-list">
+          {_features.map((feature) => (
             <li
-              className="bg-gray-200 font-outfit rounded-full h-[10%] flex justify-center items-center"
               key={feature.id}
+              id={feature.id}
+              className={active === feature.id ? "active" : ""}
+              onClick={() => handleActiveId(feature.id)}
             >
               {feature.name}
             </li>
           ))}
         </ul>
-      </div>
-      <div className="account flex justify-start items-center py-2 px-3">
-        <div className="flex bg-gray-200 w-full rounded-full justify-start items-center py-2 px-3">
-          <GoGear size={22} />
-          <p className="ml-1 flex justify-center items-center">Settings</p>
+        <div className="sidebar-footer">
+          <button onClick={() => handlelogout()}>Logout</button>
         </div>
-      </div>
+      </nav>
     </div>
   );
 }
