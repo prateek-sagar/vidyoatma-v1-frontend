@@ -1,6 +1,7 @@
 import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import "../css/DashboardHome.css";
+import institutionStore from "../redux/institutionStore";
 
 const standards_name = [
   "First",
@@ -17,10 +18,12 @@ const standards_name = [
   "Twelfth",
 ];
 function Standards() {
-  const lowerStandard = 1;
-  const higherStandard = 10;
   const standards = [];
-  for (let i = lowerStandard; i <= higherStandard; i++) {
+  for (
+    let i = institutionStore.getState().lowerStandard;
+    i <= institutionStore.getState().higherStandard;
+    i++
+  ) {
     standards.push({ id: i, standard: standards_name[i - 1] });
   }
   return (
