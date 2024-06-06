@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../css/LoginPage.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserContext } from "../components/UserContext";
-import { useFeatureContext } from "../components/FeaturesContext";
+import { useFeatureContext } from "../sharedcomponents/FeaturesContext";
+import store from "../redux/store";
+import { setUser } from "../redux/actions";
 const LOGIN_DATA = {
   username: "",
   password: "",
@@ -10,7 +11,6 @@ const LOGIN_DATA = {
 
 function Login() {
   const [data, setData] = useState(LOGIN_DATA);
-  const { login } = useUserContext();
   const { addFeature } = useFeatureContext();
   const navigate = useNavigate();
 
@@ -22,10 +22,11 @@ function Login() {
     setData({ ...data, password: e.target.value });
   }
 
-  async function authenticate() {
+  async function authenticate(e) {
+    e.preventDefault();
     try {
       const response = await fetch(
-        "http://127.0.0.1:8080/api/v1/auth/authenticate",
+        "http://localhost:8080/api/v1/auth/authenticate",
         {
           method: "POST",
           mode: "cors",
@@ -36,7 +37,8 @@ function Login() {
       );
       if (response.ok) {
         const result = await response.json();
-        login(result);
+        // console.log(result);
+        store.dispatch(setUser(result.id, result.role, result.features));
         addFeature(result.features);
         navigate("/dashboard");
       }
@@ -46,7 +48,7 @@ function Login() {
 
     // fetch API
 
-    console.log(data);
+    // console.log(data);
   }
 
   // Login page accessible to all
@@ -56,7 +58,12 @@ function Login() {
         Login
       </h1>
       <div className="flex-center login-card">
-        <form className="login-form" action="" method="post">
+        <form
+          className="login-form"
+          action=""
+          onSubmit={authenticate}
+          method="post"
+        >
           <input type="hidden" name="" />
           <label className="font-outfit text-2xl md:text-3xl font-semibold">
             Enter Username
@@ -67,7 +74,7 @@ function Login() {
             type="text"
             name="username"
             onChange={(e) => handleUsername(e)}
-            placeholder=" Enter username"
+            placeholder="Enter username"
           />
           <label className="font-outfit text-2xl md:text-3xl font-semibold">
             Enter Password
@@ -82,12 +89,7 @@ function Login() {
             required
             placeholder="Enter password"
           />
-          <input
-            type="submit"
-            onClick={authenticate}
-            className="login-btn"
-            value="login"
-          />
+          <input type="submit" className="login-btn" value="login" />
           <p className="w-full flex-center">
             Not an existing user?{" "}
             <Link to={"/signup"} className="underline">
