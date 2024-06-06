@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useImmer } from "use-immer";
-import UserAccount from "../components/UserAccount";
-import InstitutionDetails from "../components/InstitutionDetails";
+import UserAccount from "../sharedcomponents/UserAccount";
+import InstitutionDetails from "../sharedcomponents/InstitutionDetails";
 import useMultistepForm from "../customHooks/useMultistepForm";
 import { Link, useNavigate } from "react-router-dom";
-import { useFeatureContext } from "../components/FeaturesContext";
-import { useUserContext } from "../components/UserContext";
+import { useFeatureContext } from "../sharedcomponents/FeaturesContext";
+import { useUserContext } from "../sharedcomponents/UserContext";
 
 const formData = {
   username: "",

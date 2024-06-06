@@ -3,7 +3,7 @@ import "./css/App.css";
 
 import { RouterProvider } from "react-router-dom";
 import { Routes } from "./routes/Routes.jsx";
-import { FeatureProvider } from "./components/FeaturesContext.jsx";
+import { FeatureProvider } from "./sharedcomponents/FeaturesContext.jsx";
 export default function App() {
   return (
     <FeatureProvider>

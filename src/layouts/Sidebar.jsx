@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/Navigation.css";
-import { useFeatureContext } from "../components/FeaturesContext";
+import { useFeatureContext } from "../sharedcomponents/FeaturesContext";
 import { useNavigate } from "react-router-dom";
 import store from "../redux/store";
 import { removeUser } from "../redux/actions";
