@@ -1,26 +1,21 @@
-import React from "react";
-import Standards from "../components/Standards";
 import "../css/DashboardHome.css";
-import { useUserContext } from "../components/UserContext";
+import InstitutionHome from "../institutionComponents/InstitutionHome";
+import store from "../redux/store";
+import institutionStore from "../redux/institutionStore";
 
 function DashboardHome() {
-  const { user } = useUserContext();
-
+  console.log(institutionStore.getState());
   return (
     <div className="home-container">
+      {/* user information and link to change it if needed */}
       <div className="institution-details">
-        <p>GOne Test School</p>
-        <p>{user.id}</p>
-        <p>Sahibabad</p>
+        <p>{institutionStore.getState().name}</p>
+        <p>{store.getState().id}</p>
+        <p>{institutionStore.getState().city}</p>
         <p></p>
       </div>
-      <div className="btn-section">
-        <button className="">Add Student</button>
-        <button className="">Add Teacher</button>
-      </div>
-      <div className="">
-        <Standards />
-      </div>
+      {/* the below section will be changed */}
+      <InstitutionHome />
     </div>
   );
 }

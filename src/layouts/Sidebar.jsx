@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "../css/Navigation.css";
 import { useFeatureContext } from "../components/FeaturesContext";
-import { useUserContext } from "../components/UserContext";
 import { useNavigate } from "react-router-dom";
+import store from "../redux/store";
+import { removeUser } from "../redux/actions";
 function Sidebar() {
   const [active, setActive] = useState(1);
   const { feature } = useFeatureContext();
-  const { logout } = useUserContext();
   const navigate = useNavigate();
   const handlelogout = () => {
-    logout();
+    store.dispatch(removeUser());
     console.log("logging out");
     navigate("/login");
   };

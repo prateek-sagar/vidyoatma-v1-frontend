@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/home.css";
-import { useUserContext } from "../components/UserContext";
 function Home() {
-  const { user } = useUserContext();
   return (
     <main className="main-content">
       <section className="up home-para flex-layout">
