@@ -1,0 +1,4 @@
+@import "./App.css";
+.feature-wrapper {
+  padding-block: var(--pd-horizontal);
+}
