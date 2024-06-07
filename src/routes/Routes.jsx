@@ -3,9 +3,13 @@ import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../pages/Login.jsx";
 import SignUp from "../pages/SignUp.jsx";
-const Private = lazy(() => import("../wrapper/Private.jsx"));
+import Private from "../wrapper/Private.jsx";
 const DashboardHome = lazy(() => import("../layouts/DashboardHome"));
 import Public from "../wrapper/Public";
+import FeatureWrapper, {
+  loader as featureLoader,
+} from "../sharedcomponents/FeatureWrapper.jsx";
+import ErrorPage from "../sharedcomponents/ErrorPage.jsx";
 
 export const Routes = createBrowserRouter([
   {
@@ -29,10 +33,21 @@ export const Routes = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Private />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "",
-        element: <DashboardHome />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <DashboardHome />,
+          },
+          {
+            path: ":feature",
+            element: <FeatureWrapper />,
+            loader: featureLoader,
+          },
+        ],
       },
     ],
   },
