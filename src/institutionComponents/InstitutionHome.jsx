@@ -51,7 +51,7 @@ export default function InstitutionHome() {
     }
   };
   useEffect(() => {
-    if (store.getState().isLogin && !fetched) {
+    if (store.getState().isLogin && institutionStore.getState().name === null) {
       console.log("fetching....");
 
       console.log(store.getState().id);
@@ -62,14 +62,22 @@ export default function InstitutionHome() {
     return () => {};
   }, [store.getState().isLogin]);
   return (
-    <section>
-      <div className="btn-section">
-        <button className="">Add Student</button>
-        <button className="">Add Teacher</button>
+    <>
+      <div className="institution-details">
+        <p>{institutionStore.getState().name}</p>
+        <p>{store.getState().id}</p>
+        <p>{institutionStore.getState().city}</p>
+        <p></p>
       </div>
-      <div className="">
-        <Standards />
-      </div>
-    </section>
+      <section>
+        <div className="btn-section">
+          <button className="">Add Student</button>
+          <button className="">Add Teacher</button>
+        </div>
+        <div className="">
+          <Standards />
+        </div>
+      </section>
+    </>
   );
 }
