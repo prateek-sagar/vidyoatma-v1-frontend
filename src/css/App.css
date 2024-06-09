@@ -79,28 +79,6 @@ body {
   grid-area: country;
 }
 
-.sidebar {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: 15% 70% 15%;
-  grid-template-areas:
-    "user-info"
-    "features"
-    "account";
-}
-
-.user-info {
-  grid-area: user-info;
-}
-
-.features {
-  grid-area: features;
-}
-
-.account {
-  grid-area: account;
-}
-
 .dashboard-institution-name {
   display: grid;
   grid-template-columns: 50% 50%;

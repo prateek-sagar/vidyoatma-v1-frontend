@@ -38,7 +38,7 @@ function Sidebar() {
         <p className="">G-One Test School</p>
         <p className="">test@school.com</p>
       </div>
-      <nav>
+      <nav className="features">
         <ul className="nav-list">
           {_features.map((feature) => (
             <Link
@@ -52,10 +52,10 @@ function Sidebar() {
             </Link>
           ))}
         </ul>
-        <div className="sidebar-footer">
-          <button onClick={() => handlelogout()}>Logout</button>
-        </div>
       </nav>
+      <div className="sidebar-footer">
+        <button onClick={() => handlelogout()}>Logout</button>
+      </div>
     </div>
   );
 }

@@ -1,14 +1,29 @@
 .sidebar {
-  position: sticky;
-  top: 0;
-  min-height: 100svh;
-  background-color: #234;
   display: grid;
-  gap: 1rem;
+  padding-block-start: 1.2rem;
+  height: 100svh;
+  grid-template-columns: auto;
+  grid-template-rows: 18% 70% auto;
+  grid-template-areas:
+    "user-info"
+    "features"
+    "account";
+  background-color: #234;
+}
+
+.user-info {
+  grid-area: user-info;
+}
+
+.features {
+  grid-area: features;
+}
+
+.account {
+  grid-area: account;
 }
 
 .sidebar-header {
-  /* background-color: pink; */
   padding-inline-start: 1rem;
   display: grid;
   align-items: center;
@@ -29,6 +44,7 @@
 
 nav {
   height: auto;
+  overflow-y: auto;
 }
 
 .nav-list {
@@ -44,23 +60,40 @@ nav {
   border-radius: 100vw 0 0 100vw;
   flex: auto;
   align-content: center;
-  padding-inline-start: 1.5rem;
+  padding-inline: 1.5rem;
   cursor: pointer;
 }
 
 .nav-list .active {
   background-color: #123;
+  padding: auto;
 }
 
 .sidebar-footer {
-  display: grid;
-  padding-inline: 1.5rem;
-  padding-block: 0.25rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .sidebar-footer button {
-  background-color: rgba(52, 67, 82, 0.834);
+  background-color: #123;
   border-radius: 100vw;
-  margin-inline-end: auto;
-  padding-inline: 1rem;
-  padding-block: 0.25rem;
+}
+
+@media (max-width: 30em) {
+  .sidebar {
+    padding-block-start: 1.8rem;
+    background-color: #234;
+  }
+  @supports (backdrop-filter: blur(1rem)) {
+    .sidebar {
+      background-color: hsla(0, 0%, 100%, 0.1);
+      backdrop-filter: blur(1.5rem);
+    }
+  }
+  .nav-list .links {
+    border-radius: 9999px;
+    width: 80%;
+    margin-inline: auto;
+  }
 }
