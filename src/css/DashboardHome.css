@@ -6,6 +6,9 @@
   margin-block: var(--gaps);
   padding: var(--gaps);
 }
+
+
+
 .institution-details {
   height: max-content;
   display: grid;
@@ -46,7 +49,42 @@
   border-radius: 5px;
   border-left: 5px solid #ffffff;
 }
+.student-form {
+  display: grid;
+  width: auto;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  gap: 1rem;
+}
+.single-section {
+  /* background-color: white; */
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
 
+.student-form div > input {
+  background-color: transparent;
+  border-radius: 0.15rem;
+  padding-inline: 0.75rem 0.5rem;
+  outline: 0.08rem solid gray;
+  outline-offset: 0.05rem;
+}
+.student-form div > input[type="radio"] {
+  outline: none;
+}
+.student-form div > input:focus {
+  background-color: hsl(0 5% 98% / 0.4);
+}
+
+.submit-btn {
+  background-color: #234;
+  color: #ffffff;
+  width: fit-content;
+  margin-inline-start: auto;
+  padding-inline: 2rem;
+  cursor: pointer;
+}
 @media screen and (max-width: 480px) {
   .standard-list {
     width: 100%;
