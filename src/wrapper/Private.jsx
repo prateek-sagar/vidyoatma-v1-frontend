@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "../layouts/Sidebar";
 import "../css/PrivateWrapper.css";
-import store from "../redux/store";
+import store from "../redux/stores/userStore";
 import { FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 export default function Private() {

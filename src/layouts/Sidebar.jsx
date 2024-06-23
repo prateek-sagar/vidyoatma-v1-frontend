@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "../css/Navigation.css";
 import { useFeatureContext } from "../sharedcomponents/FeaturesContext";
 import { Link, useNavigate } from "react-router-dom";
-import store from "../redux/store";
-import { removeUser } from "../redux/actions";
+import store from "../redux/stores/userStore";
+import { removeAllStandard, removeUser } from "../redux/actions";
+import { standardStore } from "../redux/stores/StandardStore";
 function Sidebar() {
   const [active, setActive] = useState(1);
   const { feature } = useFeatureContext();
@@ -12,6 +13,7 @@ function Sidebar() {
   const handlelogout = () => {
     store.dispatch(removeUser());
     console.log("logging out");
+    standardStore.dispatch(removeAllStandard());
     navigate("/login");
   };
   const handleActiveId = (id) => {
@@ -54,7 +56,12 @@ function Sidebar() {
         </ul>
       </nav>
       <div className="sidebar-footer">
-        <button onClick={() => handlelogout()}>Logout</button>
+        <button
+          className="flex justify-center items-center px-[0.5rem] py-[0.15rem]"
+          onClick={() => handlelogout()}
+        >
+          Logout
+        </button>
       </div>
     </div>
   );

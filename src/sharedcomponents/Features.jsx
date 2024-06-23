@@ -1,12 +1,11 @@
 import InsAllocation from "../institutionComponents/InsAllocation";
 import InsAttendance from "../institutionComponents/InsAttendance";
-import Attendance from "../institutionComponents/InsAttendance";
 import InsFinance from "../institutionComponents/InsFinance";
 import InsNotifications from "../institutionComponents/InsNotifications";
 import InsStudentPortfolio from "../institutionComponents/InsStudentPortfolio";
 import InsTrackCourse from "../institutionComponents/InsTrackCourse";
 import InsTsunami from "../institutionComponents/InsTsunami";
-import store from "../redux/store";
+import store from "../redux/stores/userStore";
 
 export function getFeature(params) {
   switch (store.getState().role) {

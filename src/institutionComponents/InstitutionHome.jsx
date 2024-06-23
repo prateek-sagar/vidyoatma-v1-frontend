@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Standards from "./Standards";
-import store from "../redux/store";
-import institutionStore from "../redux/institutionStore";
+import store from "../redux/stores/userStore";
+import institutionStore from "../redux/stores/institutionStore";
 import { setInstitution } from "../redux/actions";
 
 const _fetch = {
@@ -16,7 +16,7 @@ export default function InstitutionHome() {
   const [fetched, setFetched] = useState(false);
   const getUser = async () => {
     const response = await fetch(
-      "http://localhost:8080/api/v1/get/institution",
+      `${import.meta.env.VITE_API_BASE_URL}/get/institution`,
       {
         method: "POST",
         mode: "cors",
@@ -48,6 +48,7 @@ export default function InstitutionHome() {
           result.higherStandard
         )
       );
+      setFetched(true);
     }
   };
   useEffect(() => {
@@ -57,10 +58,8 @@ export default function InstitutionHome() {
       console.log(store.getState().id);
       console.log(jsonData);
       getUser();
-      setFetched(true);
     }
-    return () => {};
-  }, [store.getState().isLogin]);
+  }, []);
   return (
     <>
       <div className="institution-details">
@@ -69,14 +68,12 @@ export default function InstitutionHome() {
         <p>{institutionStore.getState().city}</p>
         <p></p>
       </div>
-      <section>
+      <section className="section">
         <div className="btn-section">
           <button className="">Add Student</button>
           <button className="">Add Teacher</button>
         </div>
-        <div className="">
-          <Standards />
-        </div>
+        <Standards />
       </section>
     </>
   );
