@@ -5,3 +5,14 @@ export const REMOVE_USER = "removeUser";
 export const SET_PARTICIPANT = "setParticipant";
 export const REMOVE_PARTICIPANT = "remove_participant";
 export const CHANGE_PARTICIPANT = "changePariticipant";
+// For standard
+export const SET_STANDARDS = "setStandards";
+export const REMOVE_STANDARDS = "removeStandards";
+export const REMOVE_ALL_STANDARDS = "removeAllStandards";
+// For students
+export const ADD_STUDENT = "addStudent";
+export const REMOVE_STUDENT = "removeStudent";
+export const EDIT_STUDENT = "editStudent";
+//for sections
+export const ADD_SECTION = "addSection";
+export const REMOVE_SECTION = "removeSection";
