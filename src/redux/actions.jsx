@@ -46,3 +46,23 @@ export const setInstitution = (
     higherStandard: higherStandard,
   },
 });
+
+export const setStandard = (object) => ({
+  type: actions.SET_STANDARDS,
+  payload: {
+    object,
+  },
+});
+
+export const removeAllStandard = () => ({
+  type: actions.REMOVE_ALL_STANDARDS,
+  payload: {},
+});
+
+export const addSections = (id, _section) => ({
+  type: actions.ADD_SECTION,
+  payload: {
+    index: id,
+    section: _section,
+  },
+});
