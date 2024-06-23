@@ -1,41 +1,40 @@
-import React from "react";
-import { IoIosArrowDown } from "react-icons/io";
+import React, { useEffect, useState } from "react";
 import "../css/DashboardHome.css";
-import institutionStore from "../redux/institutionStore";
-
+import { controller, standardFetch } from "../controllers/AccordionController";
+import { standardStore } from "../redux/stores/StandardStore";
+import institutionStore from "../redux/stores/institutionStore";
+import StandadrdAccordion from "../sharedcomponents/StandardAccordion";
 const standards_name = [
-  "First",
-  "Second",
-  "Third",
-  "Fourth",
-  "Fifth",
-  "Sixth",
-  "Seventh",
-  "Eighth",
-  "Nineth",
-  "Tenth",
-  "Eleventh",
-  "Twelfth",
+  { id: 1, name: "First" },
+  { id: 2, name: "Second" },
+  { id: 3, name: "Third" },
+  { id: 4, name: "Fourth" },
+  { id: 5, name: "Fifth" },
+  { id: 6, name: "Sixth" },
+  { id: 7, name: "Seventh" },
+  { id: 8, name: "Eighth" },
+  { id: 9, name: "Nineth" },
+  { id: 10, name: "Tenth" },
+  { id: 11, name: "Eleventh" },
+  { id: 12, name: "Twelfth" },
 ];
+
 function Standards() {
-  const standards = [];
-  for (
-    let i = institutionStore.getState().lowerStandard;
-    i <= institutionStore.getState().higherStandard;
-    i++
-  ) {
-    standards.push({ id: i, standard: standards_name[i - 1] });
+  const [change, setChange] = useState(false);
+  useEffect(() => {
+    setChange(false);
+  }, [change]);
+
+  const handleChange = () => {
+    setChange(true);
+  };
+
+  if (standardStore.getState().isLoading) {
+    standardFetch(standards_name);
   }
-  return (
-    <ul className="standard-list">
-      {standards.map((standard) => (
-        <li key={standard.id} className="">
-          {standard.standard}
-          <IoIosArrowDown />
-        </li>
-      ))}
-    </ul>
-  );
+  let titles = standardStore.getState();
+  console.log(titles.data);
+  return <StandadrdAccordion _titles={titles.data} change={handleChange} />;
 }
 
 export default Standards;

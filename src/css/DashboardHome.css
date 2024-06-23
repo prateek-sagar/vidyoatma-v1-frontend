@@ -7,8 +7,6 @@
   padding: var(--gaps);
 }
 
-
-
 .institution-details {
   height: max-content;
   display: grid;
@@ -17,6 +15,13 @@
 .institution-details p:nth-child(1) {
   font-size: var(--fs-900);
   font-weight: var(--fw-bold);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
 }
 .btn-section {
   height: 2.25rem;
@@ -86,6 +91,9 @@
   cursor: pointer;
 }
 @media screen and (max-width: 480px) {
+  .home-container {
+    padding-inline: 0.5rem;
+  }
   .standard-list {
     width: 100%;
   }

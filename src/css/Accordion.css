@@ -1,0 +1,84 @@
+.wrapper {
+  color: white;
+  margin-inline-end: auto;
+  margin-block: auto;
+  max-width: 50rem;
+  width: 100%;
+}
+.accordion {
+  --_panel-padding: 0.75rem;
+  --_button-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--_panel-padding);
+}
+
+.accordion-panel {
+  background-color: #234;
+  width: 100%;
+  display: flex;
+  height: 3.3rem;
+  overflow: hidden;
+  border-radius: 5px;
+  border-left: 5px solid white;
+  gap: var(--_panel-padding);
+  margin-inline: auto;
+  padding: var(--_panel-padding);
+  flex-direction: column;
+  transition: height 500ms;
+}
+.accordion-panel:has([aria-expanded="true"]) {
+  height: clamp(15rem, 70vh, 50rem);
+}
+.accordion-heading {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 1.1rem;
+  border: 0;
+  height: 1.8rem;
+  outline: none;
+}
+
+.accordion-panel:focus-within {
+  outline: 2px solid rgb(255, 255, 255);
+  outline-offset: 0.15rem;
+}
+.add-btn {
+  display: flex;
+  background-color: hsl(0 0 80% / 0.4);
+  gap: 0.25rem;
+  align-items: center;
+  height: 2rem;
+  margin: 0;
+  padding-block: 0;
+  padding-inline: 0.45rem;
+  /* outline: 1px solid white; */
+  border-radius: 100vw;
+}
+.add-btn p {
+  /* background-color: pink; */
+  height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 480px) {
+  .add-btn {
+    height: 1.6rem;
+    gap: 0.15rem;
+  }
+}
+.accordion-content {
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 500ms 250ms;
+}
+.accordion-content[aria-hidden="false"] {
+  opacity: 1;
+}
