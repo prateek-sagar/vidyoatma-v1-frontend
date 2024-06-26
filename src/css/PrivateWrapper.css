@@ -33,7 +33,7 @@
     background-color: rgb(0, 0, 0);
     border-radius: 999px;
     color: white;
-    z-index: 1999;
+    z-index: 2999;
     display: block;
     position: fixed;
     padding: 0.35rem;
@@ -46,7 +46,7 @@
   .sidebar-container {
     height: 100svh;
     position: fixed;
-    z-index: 999;
+    z-index: 1999;
     min-width: 13.5em;
     padding-inline-start: 0.5rem;
     transform: translateX(-100%);

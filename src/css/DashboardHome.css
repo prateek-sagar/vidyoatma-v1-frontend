@@ -1,12 +1,17 @@
 .home-container {
   --gaps: 2rem;
   height: max-content;
-  display: grid;
+  display: flex;
+  position: relative;
   gap: var(--gaps);
   margin-block: var(--gaps);
   padding: var(--gaps);
+  overflow: hidden;
 }
-
+.institution-home-container {
+  display: grid;
+  width: 100%;
+}
 .institution-details {
   height: max-content;
   display: grid;
@@ -56,39 +61,54 @@
 }
 .student-form {
   display: grid;
-  width: auto;
-  margin-inline: auto;
-  padding-inline: 2rem;
+  width: stretch;
+  margin-inline: 0.1rem;
+  height: fit-content;
   gap: 1rem;
 }
+
 .single-section {
-  /* background-color: white; */
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
 }
-
+.single-section .input-group {
+  display: grid;
+  width: 45%;
+}
 .student-form div > input {
   background-color: transparent;
   border-radius: 0.15rem;
   padding-inline: 0.75rem 0.5rem;
   outline: 0.08rem solid gray;
   outline-offset: 0.05rem;
+  width: 100%;
 }
 .student-form div > input[type="radio"] {
   outline: none;
+  width: 0.9rem;
 }
 .student-form div > input:focus {
-  background-color: hsl(0 5% 98% / 0.4);
+  /* background-color: hsl(0 5% 98% / 0.4); */
+  outline: 1.5px solid white;
+  outline-offset: 0.1rem;
 }
-
+input[type="date"] {
+  color: white !important; /* Replace with your desired color (e.g., red, #ff0000) */
+}
+.gender-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .submit-btn {
-  background-color: #234;
+  background-color: #123;
   color: #ffffff;
   width: fit-content;
   margin-inline-start: auto;
   padding-inline: 2rem;
   cursor: pointer;
+  border-radius: 5px;
 }
 @media screen and (max-width: 480px) {
   .home-container {
@@ -109,5 +129,17 @@
   }
   .btn-section button {
     margin-inline-end: 0;
+  }
+  /* .single-section {
+    display: grid;
+    padding-inline: 2rem;
+  }
+  } */
+  .single-section .input-group {
+    width: stretch;
+    left: 0;
+  }
+  .gender-section {
+    grid-template-columns: auto;
   }
 }

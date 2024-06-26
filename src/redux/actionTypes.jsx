@@ -16,3 +16,11 @@ export const EDIT_STUDENT = "editStudent";
 //for sections
 export const ADD_SECTION = "addSection";
 export const REMOVE_SECTION = "removeSection";
+//for teacher
+export const ADD_TEACHER = "addTeacher";
+export const REMOVE_TEACHER = "removeTeacher";
+export const EDIT_TEACHER = "editTeacher";
+//For Form
+export const OPEN_FORM = "openForm";
+export const CLOSE_FORM = "closeForm";
+export const SET_FORM = "setForm";

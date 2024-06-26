@@ -10,6 +10,7 @@ import {
 } from "../controllers/AccordionController";
 import SectionTable from "./SectionTable";
 import { useEffect } from "react";
+import { ADD_STUDENT } from "../redux/actionTypes";
 const handleAccordion = (e, setCurrent) => {
   const activePanel = e.target.closest(".accordion-panel");
   if (!activePanel) return;
@@ -113,7 +114,7 @@ export default function StandadrdAccordion({ _titles, change }) {
                     <IoIosAdd size={20} />
                     <p>Section</p>
                   </button>
-                  <button className="add-btn">
+                  <button className="add-btn" value={ADD_STUDENT}>
                     <VscPersonAdd size={20} /> <p>Student</p>
                   </button>
                 </div>

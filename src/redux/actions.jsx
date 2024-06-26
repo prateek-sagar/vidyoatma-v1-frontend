@@ -66,3 +66,14 @@ export const addSections = (id, _section) => ({
     section: _section,
   },
 });
+
+export const openForm = (form) => ({
+  type: actions.OPEN_FORM,
+  payload: {
+    form: form,
+  },
+});
+
+export const closeForm = () => ({
+  type: actions.CLOSE_FORM,
+});

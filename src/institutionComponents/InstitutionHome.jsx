@@ -3,6 +3,8 @@ import Standards from "./Standards";
 import store from "../redux/stores/userStore";
 import institutionStore from "../redux/stores/institutionStore";
 import { setInstitution } from "../redux/actions";
+import { formController } from "../controllers/FormController";
+import { ADD_STUDENT, ADD_TEACHER } from "../redux/actionTypes";
 
 const _fetch = {
   id: "",
@@ -60,8 +62,9 @@ export default function InstitutionHome() {
       getUser();
     }
   }, []);
+
   return (
-    <>
+    <div className="institution-home-container">
       <div className="institution-details">
         <p>{institutionStore.getState().name}</p>
         <p>{store.getState().id}</p>
@@ -70,11 +73,15 @@ export default function InstitutionHome() {
       </div>
       <section className="section">
         <div className="btn-section">
-          <button className="">Add Student</button>
-          <button className="">Add Teacher</button>
+          <button value={ADD_STUDENT} onClick={(e) => formController(e)}>
+            Add Student
+          </button>
+          <button value={ADD_TEACHER} onClick={(e) => formController(e)}>
+            Add Teacher
+          </button>
         </div>
         <Standards />
       </section>
-    </>
+    </div>
   );
 }

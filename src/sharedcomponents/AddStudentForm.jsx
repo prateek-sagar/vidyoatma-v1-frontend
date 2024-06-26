@@ -28,11 +28,19 @@ function AddStudentForm() {
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
   const [other, setOther] = useState(false);
+
   const handleSubmit = async () => {
     try {
       console.log(import.meta.env.VITE_API_BASE_URL + "/dashboard");
-      const response = fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/add/student`
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/add/student`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(studentData),
+          credentials: "include",
+        }
       );
     } catch (error) {}
   };
@@ -47,9 +55,9 @@ function AddStudentForm() {
   };
 
   return (
-    <form className="bg-red-200 student-form" onSubmit={() => handleSubmit()}>
+    <form className="student-form" onSubmit={() => handleSubmit()}>
       <div className="single-section">
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">First Name</label>
           <input
             name="first_name"
@@ -59,7 +67,7 @@ function AddStudentForm() {
             value={data.first_name}
           />
         </div>
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">Last Name</label>
           <input
             name="second_name"
@@ -71,7 +79,7 @@ function AddStudentForm() {
         </div>
       </div>
       <div className="single-section">
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">Admission Number</label>
           <input
             name="admission_no"
@@ -81,7 +89,7 @@ function AddStudentForm() {
             value={data.admission_no}
           />
         </div>
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">Standard</label>
           <input
             name="standard"
@@ -93,7 +101,7 @@ function AddStudentForm() {
         </div>
       </div>
       <div className="single-section">
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">Section</label>
           <input
             name="section"
@@ -103,7 +111,7 @@ function AddStudentForm() {
             value={data.section}
           />
         </div>
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">Role Number</label>
           <input
             name="role_number"
@@ -114,71 +122,77 @@ function AddStudentForm() {
           />
         </div>
       </div>
-      <div className="single-section ">
-        <div className="grid">
+      <div className="single-section">
+        <div className="input-group">
           <label htmlFor="">Date of birth</label>
           <input
             name="dob"
             onChange={(e) => handleChange(e)}
             required
-            type="text"
+            type="date"
             value={data.dob}
           />
         </div>
-        <div className="grid w-1/2">
+        <div className="input-group">
           <h2>Gender</h2>
-          <div className="flex items-center gap-[0.5rem]">
-            <input
-              name="gender"
-              onChange={(e) => {
-                setMale(e.target.checked);
-                setFemale(false);
-                setOther(false);
-                updateData((draft) => {
-                  draft[e.target.name] = e.target.name;
-                });
-              }}
-              required
-              type="radio"
-              checked={male}
-            />
-            <label htmlFor="">Male</label>
-            <input
-              name="gender"
-              onChange={(e) => {
-                setMale(false);
-                setFemale(e.target.checked);
-                setOther(false);
-                updateData((draft) => {
-                  draft[e.target.name] = e.target.name;
-                });
-              }}
-              required
-              type="radio"
-              checked={female}
-            />
-            <label htmlFor="">Female</label>
-            <input
-              name="gender"
-              onChange={(e) => {
-                setMale(false);
-                setFemale(false);
-                setOther(e.target.checked);
-                updateData((draft) => {
-                  draft[e.target.name] = e.target.name;
-                });
-              }}
-              required
-              type="radio"
-              checked={other}
-            />
-            <label htmlFor="">Other</label>
+          <div className="gender-section">
+            <div className="flex gap-1">
+              <input
+                name="gender"
+                onChange={(e) => {
+                  setMale(e.target.checked);
+                  setFemale(false);
+                  setOther(false);
+                  updateData((draft) => {
+                    draft[e.target.name] = e.target.name;
+                  });
+                }}
+                required
+                type="radio"
+                checked={male}
+              />
+              <label htmlFor="">Male</label>
+            </div>
+            <div className="flex gap-1">
+              <input
+                name="gender"
+                onChange={(e) => {
+                  setMale(false);
+                  setFemale(e.target.checked);
+                  setOther(false);
+                  updateData((draft) => {
+                    draft[e.target.name] = e.target.name;
+                  });
+                }}
+                required
+                type="radio"
+                checked={female}
+              />
+              <label htmlFor="">Female</label>
+            </div>
+            <div className="flex gap-1">
+              <input
+                name="gender"
+                onChange={(e) => {
+                  setMale(false);
+                  setFemale(false);
+                  setOther(e.target.checked);
+                  updateData((draft) => {
+                    draft[e.target.name] = e.target.name;
+                  });
+                }}
+                required
+                type="radio"
+                checked={other}
+              />
+              <label htmlFor="">Other</label>
+            </div>
           </div>
         </div>
       </div>
       <h2 className="fs-500">Address</h2>
       <div className="single-section">
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">House Number</label>
           <input
             name="building_no"
@@ -188,7 +202,7 @@ function AddStudentForm() {
             value={data.building_no}
           />
         </div>
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">Area/Locality</label>
           <input
             name="locality"
@@ -200,7 +214,7 @@ function AddStudentForm() {
         </div>
       </div>
       <div className="single-section">
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">City</label>
           <input
             name="city"
@@ -210,7 +224,7 @@ function AddStudentForm() {
             value={data.city}
           />
         </div>
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">District</label>
           <input
             name="district"
@@ -222,7 +236,7 @@ function AddStudentForm() {
         </div>
       </div>
       <div className="single-section">
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">State</label>
           <input
             name="state"
@@ -232,7 +246,7 @@ function AddStudentForm() {
             value={data.state}
           />
         </div>
-        <div className="grid">
+        <div className="input-group">
           <label htmlFor="">Country</label>
           <input
             name="country"
