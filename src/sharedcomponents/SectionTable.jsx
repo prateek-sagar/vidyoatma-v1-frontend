@@ -43,7 +43,7 @@ export default function SectionTable({ sectionArr }) {
       </div>
       <div className="table-accordion" onClick={(e) => handleSection(e)}>
         {sectionArr.map((section, index) => (
-          <div key={index} lassName="accordion-row">
+          <div key={index} className="accordion-row">
             <div className="trigger row" aria-expanded="false">
               <div>{index + 1}</div>
               <button>{section}</button>
