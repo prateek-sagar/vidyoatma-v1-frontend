@@ -37,6 +37,9 @@
 .login-btn {
   background-color: #23afb7;
   border-radius: 0.375rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 2.5rem;
   color: white;
   font-size: var(--fs-500);
