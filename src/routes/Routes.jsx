@@ -10,6 +10,7 @@ import FeatureWrapper, {
   loader as featureLoader,
 } from "../sharedcomponents/FeatureWrapper.jsx";
 import ErrorPage from "../sharedcomponents/ErrorPage.jsx";
+import AccountSetting from "../sharedcomponents/AccountSetting.jsx";
 
 export const Routes = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const Routes = createBrowserRouter([
             path: ":feature",
             element: <FeatureWrapper />,
             loader: featureLoader,
+          },
+          {
+            path: "account",
+            element: <AccountSetting />,
           },
         ],
       },
