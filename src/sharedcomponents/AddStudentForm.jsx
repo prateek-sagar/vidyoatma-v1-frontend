@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../css/DashboardHome.css";
 import { useImmer } from "use-immer";
+import store from "../redux/stores/userStore";
 const studentData = {
-  institutionId: "",
+  institution_id: store.getState().id,
   admission_no: "",
   basic: {
     first_name: "",
@@ -18,7 +19,7 @@ const studentData = {
     state: "",
     country: "",
   },
-  standard: "",
+  standards: "",
   role_number: "",
   section: "",
 };
@@ -29,39 +30,59 @@ function AddStudentForm() {
   const [female, setFemale] = useState(false);
   const [other, setOther] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      console.log(import.meta.env.VITE_API_BASE_URL + "/dashboard");
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/add/student`,
+        `${import.meta.env.VITE_API_BASE_URL}/student/add`,
         {
           method: "POST",
           mode: "cors",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(studentData),
+          body: JSON.stringify(data),
           credentials: "include",
         }
       );
-    } catch (error) {}
+      if (response.ok) {
+        console.log(response.json());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleAddress = (e) => {
+    updateData((change) => {
+      change.address[e.target.name] = e.target.value;
+    });
   };
 
-  const handleChange = (e) => {
-    let field_name = e.target.name;
-    let value = e.target.value;
-
+  const handleBasic = (e) => {
     updateData((draft) => {
-      draft[field_name] = value;
+      draft.basic[e.target.name] = e.target.value;
+    });
+    console.log(data);
+  };
+  const handleChange = (e) => {
+    console.log(data);
+    updateData((draft) => {
+      draft[e.target.name] = e.target.value;
     });
   };
 
   return (
-    <form className="student-form" onSubmit={() => handleSubmit()}>
+    <form
+      className="student-form"
+      action=""
+      onSubmit={handleSubmit}
+      method="post"
+    >
       <div className="single-section">
         <div className="input-group">
           <label htmlFor="">First Name</label>
           <input
             name="first_name"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleBasic(e)}
             required
             type="text"
             value={data.first_name}
@@ -72,7 +93,7 @@ function AddStudentForm() {
           <input
             name="second_name"
             value={data.second_name}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleBasic(e)}
             required
             type="text"
           />
@@ -85,18 +106,18 @@ function AddStudentForm() {
             name="admission_no"
             onChange={(e) => handleChange(e)}
             required
-            type="text"
+            type="number"
             value={data.admission_no}
           />
         </div>
         <div className="input-group">
           <label htmlFor="">Standard</label>
           <input
-            name="standard"
+            name="standards"
             onChange={(e) => handleChange(e)}
             required
             type="text"
-            value={data.standard}
+            value={data.standards}
           />
         </div>
       </div>
@@ -107,6 +128,7 @@ function AddStudentForm() {
             name="section"
             onChange={(e) => handleChange(e)}
             required
+            pattern="[a-z]{1}"
             type="text"
             value={data.section}
           />
@@ -127,7 +149,7 @@ function AddStudentForm() {
           <label htmlFor="">Date of birth</label>
           <input
             name="dob"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleBasic(e)}
             required
             type="date"
             value={data.dob}
@@ -144,10 +166,11 @@ function AddStudentForm() {
                   setFemale(false);
                   setOther(false);
                   updateData((draft) => {
-                    draft[e.target.name] = e.target.name;
+                    draft.basic[e.target.name] = e.target.value;
                   });
                 }}
                 required
+                value="male"
                 type="radio"
                 checked={male}
               />
@@ -161,11 +184,12 @@ function AddStudentForm() {
                   setFemale(e.target.checked);
                   setOther(false);
                   updateData((draft) => {
-                    draft[e.target.name] = e.target.name;
+                    draft.basic[e.target.name] = e.target.value;
                   });
                 }}
                 required
                 type="radio"
+                value="female"
                 checked={female}
               />
               <label htmlFor="">Female</label>
@@ -178,11 +202,12 @@ function AddStudentForm() {
                   setFemale(false);
                   setOther(e.target.checked);
                   updateData((draft) => {
-                    draft[e.target.name] = e.target.name;
+                    draft.basic[e.target.name] = e.target.value;
                   });
                 }}
                 required
                 type="radio"
+                value="other"
                 checked={other}
               />
               <label htmlFor="">Other</label>
@@ -196,7 +221,7 @@ function AddStudentForm() {
           <label htmlFor="">House Number</label>
           <input
             name="building_no"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleAddress(e)}
             required
             type="text"
             value={data.building_no}
@@ -206,7 +231,7 @@ function AddStudentForm() {
           <label htmlFor="">Area/Locality</label>
           <input
             name="locality"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleAddress(e)}
             required
             type="text"
             value={data.locality}
@@ -218,7 +243,7 @@ function AddStudentForm() {
           <label htmlFor="">City</label>
           <input
             name="city"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleAddress(e)}
             required
             type="text"
             value={data.city}
@@ -228,7 +253,7 @@ function AddStudentForm() {
           <label htmlFor="">District</label>
           <input
             name="district"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleAddress(e)}
             required
             type="text"
             value={data.district}
@@ -240,7 +265,7 @@ function AddStudentForm() {
           <label htmlFor="">State</label>
           <input
             name="state"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleAddress(e)}
             required
             type="text"
             value={data.state}
@@ -250,21 +275,14 @@ function AddStudentForm() {
           <label htmlFor="">Country</label>
           <input
             name="country"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleAddress(e)}
             required
             type="text"
             value={"India"}
           />
         </div>
       </div>
-      <input
-        name="save"
-        onChange={(e) => handleChange(e)}
-        required
-        type="submit"
-        value="Save"
-        className="submit-btn"
-      />
+      <input type="submit" value="Save" className="submit-btn" />
     </form>
   );
 }
