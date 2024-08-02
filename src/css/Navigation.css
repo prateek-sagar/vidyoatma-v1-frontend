@@ -71,13 +71,13 @@ nav {
 
 .sidebar-footer {
   height: auto;
-  display: flex;
-  justify-content: center;
+  display: grid;
   align-items: center;
+  padding-inline-start: 1.2rem;
 }
 .sidebar-footer button {
-  background-color: #123;
-  border-radius: 100vw;
+  display: flex;
+  justify-content: start;
 }
 
 @media (max-width: 30em) {
