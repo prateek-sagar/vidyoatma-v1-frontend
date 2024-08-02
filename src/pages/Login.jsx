@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../css/LoginPage.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useFeatureContext } from "../sharedcomponents/FeaturesContext";
 import store from "../redux/stores/userStore";
 import { setUser } from "../redux/actions";
+import { ClipLoader } from "react-spinners";
 const LOGIN_DATA = {
   username: "",
   password: "",
@@ -11,7 +11,7 @@ const LOGIN_DATA = {
 
 function Login() {
   const [data, setData] = useState(LOGIN_DATA);
-  const { addFeature } = useFeatureContext();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   function handleUsername(e) {
@@ -25,7 +25,7 @@ function Login() {
   async function authenticate(e) {
     e.preventDefault();
     try {
-      console.log(e);
+      setLoading(true);
       const response = await fetch(
         "http://localhost:8080/api/v1/auth/authenticate",
         {
@@ -36,16 +36,20 @@ function Login() {
           credentials: "include",
         }
       );
+      var result;
+      if (response.status == 401) {
+        alert("Invalid Credentials");
+      }
       if (response.ok) {
-        const result = await response.json();
+        result = await response.json();
         console.log(result);
-        navigate("/dashboard");
         store.dispatch(setUser(result.id, result.role, result.features));
-        addFeature(result.features);
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error while contacting to the server");
+      setLoading(false);
+      alert("Server is not connected!!!");
     }
 
     // fetch API
@@ -91,7 +95,14 @@ function Login() {
             required
             placeholder="Enter password"
           />
-          <input type="submit" className="login-btn" value="login" />
+          <button type="submit" className="login-btn">
+            {loading ? (
+              <ClipLoader color={`white`} loading={loading} size={15} />
+            ) : (
+              ""
+            )}
+            <input type="submit" value={"Login"} />
+          </button>
           <p className="w-full flex-center">
             Not an existing user?{" "}
             <Link to={"/signup"} className="underline">
