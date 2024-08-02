@@ -32,9 +32,6 @@ export default function InstitutionHome() {
     console.log(response);
     if (response.ok) {
       let result = await response.json();
-      // console.log("====================================");
-      // console.log(result.basicInfo.name);
-      // console.log("====================================");
       institutionStore.dispatch(
         setInstitution(
           result.basicInfo.name,
@@ -56,9 +53,6 @@ export default function InstitutionHome() {
   useEffect(() => {
     if (store.getState().isLogin && institutionStore.getState().name === null) {
       console.log("fetching....");
-
-      console.log(store.getState().id);
-      console.log(jsonData);
       getUser();
     }
   }, []);
@@ -73,10 +67,16 @@ export default function InstitutionHome() {
       </div>
       <section className="section">
         <div className="btn-section">
-          <button value={ADD_STUDENT} onClick={(e) => formController(e)}>
+          <button
+            value={ADD_STUDENT}
+            onClick={(e) => formController(e.target.value)}
+          >
             Add Student
           </button>
-          <button value={ADD_TEACHER} onClick={(e) => formController(e)}>
+          <button
+            value={ADD_TEACHER}
+            onClick={(e) => formController(e.target.value)}
+          >
             Add Teacher
           </button>
         </div>
