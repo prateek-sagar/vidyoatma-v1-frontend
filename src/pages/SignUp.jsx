@@ -4,7 +4,8 @@ import UserAccount from "../sharedcomponents/UserAccount";
 import InstitutionDetails from "../sharedcomponents/InstitutionDetails";
 import useMultistepForm from "../customHooks/useMultistepForm";
 import { Link, useNavigate } from "react-router-dom";
-import { useFeatureContext } from "../sharedcomponents/FeaturesContext";
+import store from "../redux/stores/userStore";
+import { setUser } from "../redux/actions";
 
 const formData = {
   username: "",
@@ -28,7 +29,6 @@ const formData = {
 export default function SignUp() {
   const [data, updateData] = useImmer(formData);
   const [error, setError] = useState(null);
-  const { feature, addFeature } = useFeatureContext();
 
   const navigate = useNavigate();
   function handleUsernameChange(e) {
@@ -135,15 +135,15 @@ export default function SignUp() {
         }
       );
       if (response.status === 200) {
+        console.log(response);
         const result = await response.json();
+        console.log(result);
         store.dispatch(setUser(result.id, result.role, result.features));
-        addFeature(result.features);
         navigate("/dashboard");
       } else {
         setError("User Exists");
         alert(error);
       }
-      console.log("Success:", result);
     } catch (error) {
       console.error("Error:", error);
       alert("Server Error not connected! try again after some time");
